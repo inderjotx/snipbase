@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Group {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String
+  userId    String
+  snippets  Snippet[]
+  children  Group[]   @relation("children")
+  parent    Group?    @relation("children", fields: [parentId], references: [id])
+  parentId  Int?
+
+  @@unique([title, userId], name: "userId_title")
+}
+
+model Snippet {
+  id          Int         @id @default(autoincrement())
+  codeBlocks  CodeBlock[]
+  title       String
+  description String
+  isPublic    Boolean
+  userId      String
+  groupId     Int
+  group       Group       @relation(fields: [groupId], references: [id])
+}
+
+model CodeBlock {
+  id        Int     @id @default(autoincrement())
+  name      String
+  snippetId Int
+  snippet   Snippet @relation(fields: [snippetId], references: [id])
+  userId    String
+  data      String
+}

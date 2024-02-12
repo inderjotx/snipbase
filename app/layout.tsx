@@ -1,6 +1,10 @@
+import { ThemeProvider } from "@/components/Provider/ThemeProvider";
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs"
+
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +19,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <body className={inter.className}>
+            <Navbar />
+            {children}
+          </body>
+        </ThemeProvider>
+
+      </html>
+    </ClerkProvider>
   );
 }
