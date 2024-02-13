@@ -40,7 +40,7 @@ export default async function Home() {
 
   return (
     <div>
-      <CodeBlock />
+      Somethine
     </div>
   )
 }

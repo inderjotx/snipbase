@@ -17,15 +17,22 @@ styleMap.set("light", atomOneLight)
 
 
 
-export function CodeBlock() {
+export function CodeBlock({ code }: { code: string }) {
 
-    const code = `
-    function whoIsYourFather(){
-      console.log("bondu")
-    }
-  `
 
     const [show, setShow] = useState<boolean>(false)
+    const [isMounter, setIsMounted] = useState<boolean>(false)
+    const { theme } = useTheme()
+
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
+
+    if (!isMounter) {
+        return <></>
+    }
+
 
     const copyCode = () => {
         setShow(true)
@@ -39,7 +46,7 @@ export function CodeBlock() {
     return (
         <div className='flex  w-full justify-center'>
             <div className="w-4/5 rounded-md relative" >
-                <SyntaxHighlighter language="javascript" showLineNumbers style={nightOwl} >
+                <SyntaxHighlighter className="h-40 w-full" language="javascript" showLineNumbers style={styleMap.get(theme)} >
                     {code}
                 </SyntaxHighlighter>
                 <div className='h-4  absolute top-3 z-10 right-3 '>

@@ -5,6 +5,9 @@ import { ClerkProvider } from "@clerk/nextjs"
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
+import DialogProvider from "@/components/Provider/DialogProvider";
+import { DrawerForm } from "@/components/Forms/DrawerForm";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,21 +22,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning >
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <ClerkProvider>
+          <body className={cn("w-full h-full", inter.className)}>
             <Navbar />
             {children}
+            <DialogProvider />
           </body>
-        </ThemeProvider>
+        </ClerkProvider>
+      </ThemeProvider>
 
-      </html>
-    </ClerkProvider>
+    </html>
   );
 }
