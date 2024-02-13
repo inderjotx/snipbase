@@ -26,7 +26,7 @@ export const DrawerForm = () => {
                     <DrawerDescription>Always keep track of important pieces</DrawerDescription>
                 </DrawerHeader>
                 <div className="w-full flex justify-center h-1/2">
-                    {/* <SnippetCreate /> */}
+                    <SnippetCreate />
                 </div>
                 <DrawerFooter className="sticky bottom-5">
                     <Button>Submit</Button>

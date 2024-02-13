@@ -17,7 +17,7 @@ styleMap.set("light", atomOneLight)
 
 
 
-export function CodeBlock({ code }: { code: string }) {
+export function CodeBlock({ code, className }: { className?: string, code: string }) {
 
 
     const [show, setShow] = useState<boolean>(false)
@@ -44,12 +44,12 @@ export function CodeBlock({ code }: { code: string }) {
 
 
     return (
-        <div className='flex  w-full justify-center'>
-            <div className="w-4/5 rounded-md relative" >
+        <div className={cn('flex h-full w-full justify-center relative rounded-[20px] overflow-hidden', className)}>
+            <div className="w-full absolute" >
                 <SyntaxHighlighter className="h-40 w-full" language="javascript" showLineNumbers style={styleMap.get(theme)} >
                     {code}
                 </SyntaxHighlighter>
-                <div className='h-4  absolute top-3 z-10 right-3 '>
+                <div className='h-4  absolute top-2 z-10 right-2'>
                     <Button type='button' onClick={() => copyCode()} variant={"ghost"} size={"icon"} >
                         <CopyIcon className={cn('transition-all hover:scale-105 focus:hidden  ', show && "hidden")} />
                         <CheckIcon className={cn('transition-all hover:scale-105 hidden focus:block ', show && "block")}  ></CheckIcon>

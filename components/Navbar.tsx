@@ -10,10 +10,12 @@ export function Navbar() {
 
     const { userId } = useAuth()
 
+
+
     const setShowDrawer = useCreateSnippet((state) => state.setShowDrawer)
 
     return (
-        <div className='w-full z-10 flex items-center px-4 justify-between sticky top-0 h-16 backdrop-blur-md'>
+        <div className='w-full z-10 flex mb-6 items-center px-4 justify-between sticky top-0 h-16 backdrop-blur-md'>
             <div className='inline text-lg'>
                 SnipBase
             </div>

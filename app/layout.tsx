@@ -22,22 +22,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <ClerkProvider>
-          <body className={cn("w-full h-full", inter.className)}>
+
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning >
+        <body className={cn("w-full ", inter.className)}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <Navbar />
             {children}
             <DialogProvider />
-          </body>
-        </ClerkProvider>
-      </ThemeProvider>
-
-    </html>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
